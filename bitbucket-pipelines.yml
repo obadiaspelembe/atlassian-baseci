@@ -3,8 +3,19 @@ image: atlassian/default-image:3
 pipelines:
   default:
     - step:
+        name: build linsync
+        script:
+          - wget https://github.com/obadiaspelembe/linsync/archive/refs/tags/v1.0.1-alpha.zip
+          - unzip v1.0.1-alpha.zip
+          - cd linsync-1.0.1-alpha
+          - go install
+          - go build
+        artifacts: # defining the artifacts to be passed to each future step.
+          - linsync-1.0.1-alpha/linsync
+    - step:
         name: build docker image
         script:
+          - ls -l
           - docker build -t bitbucket-cibase:linsync-1.0.1-alpha .
         services:
           - docker

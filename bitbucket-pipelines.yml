@@ -10,6 +10,7 @@ pipelines:
         artifacts: # defining the artifacts to be passed to each future step.
           - linsync-1.0.1-alpha/**
     - step:
+        image: golang:1.15
         name: build linsync
         script:
           - cd linsync-1.0.1-alpha

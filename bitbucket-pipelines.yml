@@ -1,7 +1,3 @@
-# image:
-#   name: $DOCKER_REGISTRY_USERNAME/atlassian-default-image-wterraform:latest
-#   username: $DOCKER_REGISTRY_USERNAME
-#   password: $DOCKER_REGISTRY_PASSWORD
 image: atlassian/default-image:3
 
 pipelines:

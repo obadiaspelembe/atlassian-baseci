@@ -6,3 +6,5 @@ pipelines:
         name: build docker image
         script:
           - docker build -t bitbucket-cibase:linsync-1.0.1-alpha .
+        services:
+          - docker

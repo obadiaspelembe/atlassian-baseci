@@ -21,7 +21,7 @@ pipelines:
     - step:
         name: build docker image
         script:
-          - ls -l
-          - docker build -t bitbucket-cibase:linsync-1.0.1-alpha .
+          - docker build -t obadias/bitbucket-cibase:linsync-1.0.1-alpha .
+          - docker push obadias/bitbucket-cibase:linsync-1.0.1-alpha
         services:
           - docker

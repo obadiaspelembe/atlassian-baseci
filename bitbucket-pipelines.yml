@@ -21,7 +21,7 @@ pipelines:
     - step:
         name: build docker image
         script:
-          - echo ${DOCKERHUB_PASSWORD} | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+          - echo ${DOCKER_PASSWORD} | docker login --username "$DOCKE_USERNAME" --password-stdin
           - docker build -t obadias/bitbucket-cibase:linsync-1.0.1-alpha .
           - docker push obadias/bitbucket-cibase:linsync-1.0.1-alpha
         services:

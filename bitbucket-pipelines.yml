@@ -1,13 +1,11 @@
-image:
-  name: $DOCKER_REGISTRY_USERNAME/atlassian-default-image-wterraform:latest
-  username: $DOCKER_REGISTRY_USERNAME
-  password: $DOCKER_REGISTRY_PASSWORD
+# image:
+#   name: $DOCKER_REGISTRY_USERNAME/atlassian-default-image-wterraform:latest
+#   username: $DOCKER_REGISTRY_USERNAME
+#   password: $DOCKER_REGISTRY_PASSWORD
 
 pipelines:
   default:
     - step:
-        name: terraform-jobs
+        name: build docker image
         script:
-          - terraform -chdir="src" init 
-          - terraform -chdir="src" plan
-          - terraform -chdir="src" apply -auto-approve
+          - docker build -t bitbucket-cibase:linsync-1.0.1-alpha .

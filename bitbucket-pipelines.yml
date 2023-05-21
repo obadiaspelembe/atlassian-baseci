@@ -22,7 +22,7 @@ pipelines:
         name: build docker image
         script:
           - echo ${DOCKER_PASSWORD} | docker login --username "$DOCKER_USERNAME" --password-stdin
-          - docker build -t obadias/bitbucket-cibase:linsync-1.0.1-alpha .
-          - docker push obadias/bitbucket-cibase:linsync-1.0.1-alpha
+          - docker build -t obadias/bitbucket-cibase:linsyns-ansible-1.0.0 .
+          - docker push obadias/bitbucket-cibase:linsync-linsyns-ansible-1.0.0
         services:
           - docker

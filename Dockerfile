@@ -6,9 +6,15 @@ RUN unzip terraform_1.4.2_linux_amd64.zip && cp terraform /usr/local/bin/
 RUN terraform version
 
 # Install ansible
-RUN apt update
-RUN apt-add-repository --yes --update ppa:ansible/ansible
-RUN apt install ansible
+RUN apt-get update && \
+  apt-get install -y gcc python-dev libkrb5-dev && \
+  apt-get install python3-pip -y && \
+  pip3 install --upgrade pip && \
+  pip3 install --upgrade virtualenv && \
+  pip3 install pywinrm[kerberos] && \
+  apt install krb5-user -y && \ 
+  pip3 install pywinrm && \
+  pip3 install ansible
 
 # Add linsync to bin 
 COPY linsync-1.0.1-alpha/linsync /usr/local/bin/

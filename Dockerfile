@@ -6,6 +6,13 @@ RUN unzip terraform_1.4.2_linux_amd64.zip && cp terraform /usr/local/bin/
 RUN terraform version
 
 
+# add ssh keys
+RUN mkdir -p -m 0600 ~/.ssh
+COPY id_rsa ~/.ssh/id_rsa
+COPY id_rsa.pub ~/.ssh/id_rsa.pub
+
+# Install ssh pass 
+RUN apt-get install sshpass
 
 # Install ansible
 RUN apt-get update && \
@@ -15,11 +22,9 @@ RUN apt-get update && \
   pip3 install --upgrade virtualenv && \
   pip3 install ansible
 
-# Install ssh pass 
-RUN apt-get install sshpass
 
 # Add linsync to bin 
-COPY linsync-1.0.1-alpha/linsync /usr/local/bin/
+# COPY linsync-1.0.1-alpha/linsync /usr/local/bin/
 
 WORKDIR /opt/atlassian/build
 ENTRYPOINT ["/bin/bash"]

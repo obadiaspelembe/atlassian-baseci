@@ -12,7 +12,7 @@ COPY id_rsa ~/.ssh/id_rsa
 COPY id_rsa.pub ~/.ssh/id_rsa.pub
 
 # Install ssh pass 
-RUN apt-get install sshpass
+# RUN apt-get install sshpass
 
 # Install ansible
 RUN apt-get update && \

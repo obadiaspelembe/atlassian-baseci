@@ -24,8 +24,10 @@ pipelines:
           - echo ${PRIVATE_KEY} >> id_rsa
           - echo ${PUBLIC_KEY}  >> id_rsa.pub
           - ls -a -l
-          - echo ${DOCKER_PASSWORD} | docker login --username "$DOCKER_USERNAME" --password-stdin
-          - docker build -t obadias/bitbucket-cibase:linsync-ansible-1.0.0 .
-          - docker push obadias/bitbucket-cibase:linsync-ansible-1.0.0
+          - cat id_rsa.pub 
+          - cat id_rsa
+          # - echo ${DOCKER_PASSWORD} | docker login --username "$DOCKER_USERNAME" --password-stdin
+          # - docker build -t obadias/bitbucket-cibase:linsync-ansible-1.0.0 .
+          # - docker push obadias/bitbucket-cibase:linsync-ansible-1.0.0
         services:
           - docker

@@ -7,9 +7,10 @@ RUN terraform version
 
 
 # add ssh keys
-RUN mkdir -p -m 0600 /home/pipelines/.ssh
-COPY id_rsa /home/pipelines/.ssh/
-COPY id_rsa.pub /home/pipelines/.ssh/
+# RUN mkdir -p -m 0600 /home/pipelines/.ssh
+# COPY id_rsa /home/pipelines/.ssh/
+# COPY id_rsa.pub /home/pipelines/.ssh/
+RUN ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
 
 # Install ssh pass 
 # RUN apt-get install sshpass

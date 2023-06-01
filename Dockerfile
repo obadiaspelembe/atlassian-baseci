@@ -7,9 +7,9 @@ RUN terraform version
 
 
 # add ssh keys
-RUN mkdir -p -m 0600 ~/.ssh
-COPY id_rsa ~/.ssh/
-COPY id_rsa.pub ~/.ssh/
+RUN mkdir -p -m 0600 /home/pipelines/.ssh
+COPY id_rsa /home/pipelines/.ssh/
+COPY id_rsa.pub /home/pipelines/.ssh/
 
 # Install ssh pass 
 # RUN apt-get install sshpass
@@ -24,7 +24,7 @@ RUN apt-get update && \
 
 
 # Add linsync to bin 
-# COPY linsync-1.0.1-alpha/linsync /usr/local/bin/
+COPY linsync-1.0.1-alpha/linsync /usr/local/bin/
 
 WORKDIR /opt/atlassian/build
 ENTRYPOINT ["/bin/bash"]

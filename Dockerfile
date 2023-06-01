@@ -8,8 +8,8 @@ RUN terraform version
 
 # add ssh keys
 RUN mkdir -p -m 0600 ~/.ssh
-COPY id_rsa ~/.ssh/id_rsa
-COPY id_rsa.pub ~/.ssh/id_rsa.pub
+COPY id_rsa ~/.ssh/
+COPY id_rsa.pub ~/.ssh/
 
 # Install ssh pass 
 # RUN apt-get install sshpass

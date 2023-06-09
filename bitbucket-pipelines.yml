@@ -1,13 +1,28 @@
-image:
-  name: $DOCKER_REGISTRY_USERNAME/atlassian-default-image-wterraform:latest
-  username: $DOCKER_REGISTRY_USERNAME
-  password: $DOCKER_REGISTRY_PASSWORD
+image: atlassian/default-image:3
 
 pipelines:
   default:
     - step:
-        name: terraform-jobs
+        name: get linsync
         script:
-          - terraform -chdir="src" init 
-          - terraform -chdir="src" plan
-          - terraform -chdir="src" apply -auto-approve
+          - wget https://github.com/obadiaspelembe/linsync/archive/refs/tags/v1.0.1-alpha.zip
+          - unzip v1.0.1-alpha.zip
+        artifacts: # defining the artifacts to be passed to each future step.
+          - linsync-1.0.1-alpha/**
+    - step:
+        image: golang:1.15
+        name: build linsync
+        script:
+          - cd linsync-1.0.1-alpha
+          - go install
+          - go build
+        artifacts: # defining the artifacts to be passed to each future step.
+          - linsync-1.0.1-alpha/linsync
+    - step:
+        name: build docker image
+        script:
+          - echo ${DOCKER_PASSWORD} | docker login --username "$DOCKER_USERNAME" --password-stdin
+          - docker build -t obadias/bitbucket-cibase:linsync-ansible-1.0.0 .
+          - docker push obadias/bitbucket-cibase:linsync-ansible-1.0.0
+        services:
+          - docker
